@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>텍스트 그리기</title>
+</head>
+<body>
+    <canvas id="myCanvas" style="background-color: beige;"
+        width="500px" height="100px"></canvas>  
+    <input type="text" value="" size="30" placeholder="입력하세요" onkeyup="fn_get(this.value)">
+    <input type="color" id="p_color" onchange="fn_change(this)">
+    </select>
+    <script>
+        let canvas = document.getElementById('myCanvas');
+        let context = canvas.getContext('2d');
+        context.font = '50px forte';
+        // context.strokeStyle='black';
+        context.lineWidth=1;
+        context.textAlign='left';
+        function fn_change(v){
+            context.strokeStyle = v.value;
+            
+        }
+        function fn_get(text){
+            // 지우기(0,0,좌표를 기준 canvas 사이즈 만큼)
+            context.clearRect(0,0,canvas.width, canvas.height);
+            context.strokeText(text, 40, 80);
+        }
+    </script>
+</body>
+</html>

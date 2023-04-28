@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this활용</title>
+    <script>
+        function fn_change(obj){
+            console.log(obj);
+            console.log(obj.innerHTML);
+            if(obj.tagName == 'BUTTON'){
+                obj.style.color = obj.innerHTML === obj.style.color ? 'black' : obj.innerHTML  ;
+                
+            }else{
+                let r = Math.floor(Math.random()*255) + 1;
+                let g = Math.floor(Math.random()*255) + 1;
+                let b = Math.floor(Math.random()*255) + 1;
+                obj.style.color = 'rgb('+r+','+g+','+b+')';  // rgb(111,222,243)
+            }
+        }
+    </script>
+</head>
+<body>
+    <h3>this 활용</h3>
+    <hr>
+    <button onclick="fn_change(this)">red</button>
+    <button onclick="fn_change(this)">blue</button>
+    <div onclick="fn_change(this)">
+        여기를 클릭하면 크기와 색이 변경
+    </div>
+    <p onclick="fn_change(this)">^ ^</p>
+</body>
+</html>

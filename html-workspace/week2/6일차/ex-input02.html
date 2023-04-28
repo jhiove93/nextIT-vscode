@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>input select</title>
+</head>
+<body>
+    <h3>select box 변경</h3>
+    <hr>
+    <form action="http://www.naver.com" method="get">
+        <select name="p_sel" id="p_select" onchange="fn_change(this)">
+            <option value="없음" selected>선택하세요</option>
+            <option value="찬웅쌤">JAVA</option>
+            <option value="용우쌤">JSP</option>
+        </select>
+        <!-- 선택값 가져오기 버튼 클릭시 select 선택 값을 p_txt2_value에 넣어주세요-->
+        <input type="button" id="btn" value="선택값 가져오기" onclick = fn_click()>
+         <!-- disabled 은 form태그 전송시 전송이안됨
+              readonly 는 form태그 전송시 정송이 됨
+            -->
+           
+        <input type="text" id="txt" readonly disabled>
+        <input type="text" id="p_txt2" readonly disabled>
+        <input type="reset" name="" id="리셋">
+        <input type="submit" value="전송">
+    </form>
+    <script>
+        function fn_change(obj){
+            console.log(obj.selectedIndex);
+            console.log(obj.options[obj.selectedIndex].value);
+            console.log(obj.options[obj.selectedIndex].text);
+            // select box의 선택된 요소의 인덱스 selectedIndex
+            document.getElementById("txt").value =obj.options[obj.selectedIndex].value;
+        }
+        function fn_click(){
+            let obj = document.getElementById('p_select');
+            document.getElementById("p_txt2").value =obj.options[obj.selectedIndex].value;
+        }
+    </script>
+</body>
+</html>

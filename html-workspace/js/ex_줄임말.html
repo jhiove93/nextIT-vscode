@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>친해지고 싶어</title>
+</head>
+<body>
+    <h3>줄임말을 알려주세요</h3>
+    <h3>줄임말을 만들어주세요 '갈수록 비호감' -> 갈비
+        꾸민듯 안 꾸민듯 -> 꾸안꾸
+    </h3>
+    <script>
+        let msg = prompt("문장을 입력해 주세요.:");
+        let result ="";
+        let z = msg.split(" ");
+        for(let i = 0 ; i < z.length; i++){
+             result += z[i].substr(0,1);
+
+        }
+
+
+        document.write(msg + "의 줄임말은 : "+ result);
+    </script>
+</body>
+</html>

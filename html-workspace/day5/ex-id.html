@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ID</title>
+</head>
+<body>
+    <button onclick="fn_changeSize()">텍스트 크기변경 +</button>
+    <button onclick="fn_changeSizeDown()">텍스트 크기변경 -</button>
+    <p id="text1">이텍스트의 크기를 변경하세요!!</p>
+
+    <button onclick="fn_visibilty()">숨기기/보이기</button>
+    <div id="box">이 내용을 숨기거나 보이게하세요!!!</div>
+
+    <img id = "slider" src="/week1/pic/나이키.png" width = "200px" height="240px" alt="">
+    <button onclick = "fn_next()" >다음이미지</button>
+    <script>
+        let size = 20;
+        function fn_changeSize(){
+            size ++;
+            let text = document.getElementById('text1');
+            text.style.fontSize = size +'px';
+        }
+        function fn_changeSizeDown(){
+            size --;
+            let text1 = document.getElementById('text1');
+            text1.style.fontSize = size +'px';
+        }
+        function fn_visibilty(){
+            let text2 = document.querySelector('#box');
+                          // === 값도 같고 타입도 갈을떄 true   // 같으면 // 다르면 
+            box.style.display = box.style.display === "none" ? "block" : "none";  // 삼항연산자  ? : 
+        }
+        // setInterval(fn_next,500); 
+        let images = ['../pic/스벅.png','/week1/pic/트위터.png','/week1/pic/나이키.png']
+        let currentIdx = 0;
+        function fn_next(){
+            let slider = document.getElementById('slider');
+            currentIdx = (currentIdx +1) % images.length;
+            console.log(currentIdx);
+            slider.src=images[currentIdx];
+        }
+    </script>
+</body>
+</html>

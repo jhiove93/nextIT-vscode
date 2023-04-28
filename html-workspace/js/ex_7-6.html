@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방문한 시간에 따라 배경색이 변함</title>
+</head>
+<body>
+    <h3> 페이지 방문시간 짝수면 violet 홀수면 lightskyblue</h3>
+    <hr>
+    <script>
+        function fn_change(){
+            let curr = new Date();
+            if(curr.getSeconds() %2 ==0){
+                document.body.style.backgroundColor = 'violet';
+            }else{
+                document.body.style.backgroundColor = 'lightskyblue';
+            }
+            document.write("현재시간:" + curr.getHours() + ":" + curr.getMinutes() + ":" + curr.getSeconds());
+        }
+        // 1초마다 fn_change() 호출
+        setInterval(fn_change, 1000);
+        </script>
+</body>
+</html>

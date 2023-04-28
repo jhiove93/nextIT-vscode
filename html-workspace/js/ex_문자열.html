@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자열 다루기</title>
+    <script>
+        let mc = " I like McDonald's";
+        // indexOf 문자열 위치 반환
+        console.log('indexOf:' , mc.indexOf('M'));
+        // slice 문자열 자르기(인덱스, 인덱스)
+        console.log('slice:' , mc.slice(3,5));
+        console.log('slice:' , mc.slice(3));
+        // substr 문자열 자르기(인덱스,길이)
+        console.log('substr:', mc.substr(3,5));
+        console.log('substr:', mc.substr(3));
+        // toUpper toLower
+        console.log('toUpperCase:' , mc.toUpperCase());
+        console.log('toLowerCase:' , mc.toLowerCase());
+        // replace (바꿀값,바뀐값)
+        console.log('replace:' , mc.replace('like','hate'));
+        // trim
+        console.log('trim:', mc.trim());
+        // split // 기준문자열로 자르고 배열로 담음. 
+        let arr = mc.split(" ");  // 띄어쓰기로 자름 
+        for(let i = 0 ; i < arr.length; i++){
+            console.log(arr[i]); //자른배열 순서대로 배출  i=1  I , i=2 like 
+        }
+        // join
+        console.log('join:', arr.join(',')); //자른 배열에 ,로 붙여서출력
+
+        console.log( 1 + "2"+ 3 );
+        console.log("2" * 5);
+        console.log(1 + 2 + "10");
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 정적 배치: 모든 요소의 기본 배치 방식(top, left, right,..z-index 속성 영향을 받지 않음)*/
+        #static-box{background-color: lightgreen;}
+        /* 상대 배치: 기본 배치에 따라 배치 된 다음 자신의 기본위치를 기준으로
+            top, left... 속성에 따라 이동(원래의 자리는 유지되며, 이동한 요소가 다른요소와 겹칠수 있음.)
+        */
+        #relative-box{background-color: lightblue;left:30px; top:30px; position: relative;}
+        /* 절대 배치: 가장 가까운 조상 요소중 position 속성이 relative, absolute,fixed
+                     인 것을 기본으로 top, left.. 속성에 따라 위치함 (조상이 없으면 body기준)             
+        */
+        #absolute-box{background-color: orange;left:0px; top:150px; position:absolute;}
+        /* 고정 배치: 브라우저를 기준으로 top, left.. 속성에 따라 위치함 기본 위치는 제거되며
+                    다른 요소에 영향을 주지 않으며, 스크롤에 상관없이 같은 위치를 고정됨 
+        */
+        #fixed-box{background-color: yellow; bottom: 20px; right: 20px; position: fixed;}
+    </style>
+</head>
+<body>
+    <div id="static-box"><p>정적 배치(position: static) 기본</p></div>
+    <div id="relative-box"><p>상대 배치(position: relative) </p></div>
+    <div id="absolute-box"><p>절대 배치(position: absolute) </p></div>
+    <div id="fixed-box"><p>고정 배치(position: fixed) </p></div>
+    
+</body>
+</html>

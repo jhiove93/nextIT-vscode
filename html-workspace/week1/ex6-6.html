@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // prompt 프롬프트 다이얼로그
+        let msg = prompt("이름을 입력하세요^^:","ex)홍길동");
+        // alert(msg);
+        // typeof 객체의 타입리턴
+        let num = 1234;
+        console.log(num, typeof(num));
+        console.log(typeof(msg));
+        let flag = confirm(msg + " 이름이 맞나요?");
+        console.log(flag);
+        if(flag){
+            document.write("<h3>"+ msg+ "고객님 환영합니다.</h3>");
+        }else{
+            document.write("<h3>아무개님 환영합니다.</h3>");
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

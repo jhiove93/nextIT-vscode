@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 리스너 addEventListener</title>
+</head>
+<body>
+    <h3>DOM 객체 이벤트 리스너</h3>
+    <hr>
+    <!--이벤트리스너 함수등록
+        (3). addEventListener 사용 -->
+    <p id="p_id">마우스를 올리면 orchid색으로 변함</p>
+    <script>
+        let p = document.getElementById('p_id');
+        p.addEventListener('mouseover',function(e){
+            console.log(e);
+            this.style.color = 'orchid';
+        });
+        p.addEventListener('mouseout',function(e){
+            console.log(e);
+            this.style.color = 'blue';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 흐름</title>
+</head>
+<body>
+  <form action="" >Form
+    <div>DIV
+        <p>P</p>
+    </div>
+  </form>
+  <script>
+    for(let el of document.querySelectorAll('*')){
+        el.addEventListener('click',function(e){
+            console.log("캡처링",el.tagName);
+            if(el.tagName=='P'){
+                e.stopPropagation();
+            }
+        },true);
+        el.addEventListener('click',function(e){
+            console.log("버블링",el.tagName);
+        },false)
+    }
+  </script>
+</body>
+</html>

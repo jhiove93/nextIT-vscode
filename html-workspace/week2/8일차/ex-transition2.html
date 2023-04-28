@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전환 속도</title>
+    <style>
+        li {list-style: none; 
+            float: left; width: 100px; height: 50px; margin-right: 5px;
+            text-align: center; background-color: olivedrab;
+            transition-duration: 2s, 2s;}
+        #nav #gnb ul {overflow:hidden;}
+        /* ease 천천히 ~ 빨라지다가 마지막은 천천히
+           ease-in 시작을 느리게 
+           ease-out 느리게 끝냄...
+           linear 시작부터 끝까지 같은 속도
+        */
+        /* delay 지연시간*/
+        li:nth-child(1){ transition-delay: 2s;}
+        li:nth-child(2){ transition-timing-function: ease;}
+        li:nth-child(3){ transition-timing-function: ease-in;}
+        li:nth-child(4){ transition-timing-function: ease-out;}
+        li:nth-child(5){ transition-timing-function: ease-in-out;}
+        li:nth-child(1):hover {height: 250px; background-color: black; color: white;}
+        li:nth-child(2):hover {height: 250px; background-color: black; color: white;}
+        li:nth-child(3):hover {height: 250px; background-color: black; color: white;}
+        li:nth-child(4):hover {height: 250px; background-color: black; color: white;}
+        li:nth-child(5):hover {height: 250px; background-color: black; color: white;}
+    </style>
+</head>
+<body>
+    <div id="nav">
+        <div id="gnb">
+            <ul>
+                <li>nav_1</li>
+                <li>nav_2</li>
+                <li>nav_3</li>
+                <li>nav_4</li>
+                <li>nav_5</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

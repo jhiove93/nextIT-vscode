@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/nameList.css">
+    <script>
+        function fn_register(){
+            let obj = document.getElementById('nameList');
+            let newDIV = document.createElement('div');
+
+            let btn = document.createElement('button');
+            btn.innerHTML = 'X';
+
+            newDIV.innerHTML =  document.getElementById('userName').value ;
+            newDIV.onclick=function(){
+                let p = this.parentElement;
+                p.removeChild(this);
+            }
+            newDIV.append(btn);
+            obj.appendChild(newDIV);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <h1>참가 신청서</h1>
+        <form action="" onsubmit="return false">
+            <input type="text" id="userName" placeholder="이름을 입력하세요" autocomplete="off" required>
+            <button type="button" onclick="fn_register()">신청</button>
+        </form>
+        <hr>
+        <div id="nameList"></div>
+    </div>
+
+</body>
+
+</html>

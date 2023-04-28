@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for in과 for of</title>
+</head>
+<body>
+    <div>
+        <span>a</span>
+    </div>
+    <div>
+        <span>b</span>
+    </div>
+</body>
+<script>
+            let el = document.getElementsByTagName('div');
+            console.log(el);
+            // for of는 루프를 사용하여 요소를 순회(배열,문자열, Map, Set..)
+            // 요소를 직접 반환
+            for(let v of el){
+                console.log(v);
+            }
+            console.log('============================================');
+            // for in 는 루프를 사용하여 속성(키)를 순회 
+            // 엘리먼트 배열은 유사배열(NodeList) 인덱스로 접근시 function,..도 접근
+            for(let i in el){
+                console.log(el[i]);
+            }
+            console.log('============================================');
+</script>
+
+</html>

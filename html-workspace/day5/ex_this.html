@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this</title>
+    <script>
+        /* javascript에서 this는 현재 실행 컨텍스트에 따라 다른 객체를 참조하는
+           특별한 키워드
+           this의 값은 실행되는 코드의 위치에 따라 달라짐.
+           1.전역 컨텍스트에서 this (window)
+        */
+       console.log(this); // 전역 객체를 참조(window)
+        let obj = {
+            // 2. 객체 메소드에서 this
+            name: "nick"
+            ,hello : function(){
+                console.log('hello ', this.name)
+            }
+        }
+        obj.hello();
+    </script>
+    <button id="btn">click me</button>
+    <script>
+        // 3.이벤트 핸들러에서 this
+        document.getElementById("btn").onclick = function(){
+            console.log(this);
+        }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애니메이션 동작/멈춤</title>
+    <style>
+        @keyframes play-state{from {left:100px} to{left:300px}}
+        div{position: absolute; top: 70px; left:100px; width: 100px; height: 50px;
+            margin-left: -90px; background-color: black; color: white;
+            /* animation-play-state:paused ; */
+            animation: play-state 2s linear infinite alternate;}
+    </style>
+</head>
+<body>
+    <div id="div_id">box</div>
+    <button id="play">재생</button>
+    <button id="stop">멈춤</button>
+    <script>
+        let div = document.getElementById('div_id');
+        let play = document.getElementById('play');
+        play.onclick = function(e){
+            div.style.animationPlayState= 'running';
+        }
+        let stop = document.getElementById('stop');
+        stop.onclick = function(e){
+            div.style.animationPlayState = 'paused';
+        }
+    </script>
+</body>
+</html>

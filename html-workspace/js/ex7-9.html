@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체 Object</title>
+    <script>
+        function inquiry(){
+            return this.balance;
+        }
+        function deposit(money){this.balance += money};
+        function withdraw(money){this.balance -= money; return money};
+        //객체 만들기 
+        // let account = new Object();
+        // let account = {}; //위와동일
+        let account = {"owner":"팽수"}; 
+        account.code = 1111;
+        account.balance = 10000000;
+        account.inquiry = inquiry;
+        account.deposit = deposit;
+        account.withdraw = withdraw;
+        account.print = function(){
+            alert(this.balance);
+        }
+        console.log(account);
+        document.write(account.owner);
+        account.deposit(1000);
+        document.write("1000원 입금후 잔액: "+ account.inquiry()+"</br>" );
+        account.withdraw(10000);
+        document.write("10000원 출금후 잔액: "+account.inquiry()+"<br>")
+        account.print();
+
+        let keys = Object.keys(account);
+        console.log(account['owner']);
+        console.log(keys);
+        for(let i  = 0 ; i <keys.length; i++){
+            console.log(account[keys[i]]);
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

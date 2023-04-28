@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마우스 무브</title>
+</head>
+<body>
+    이미지 위에 마우스를 움직일때 move 이벤트발생
+    <img src="../../pic/몰디브.png" alt="" onmousemove = "fn_wheel(event)">
+    <div id="div_id" style="background: skyblue; width: 250px;"></div>
+    <script>
+        let div = document.getElementById('div_id');
+        function fn_wheel(e){
+            let text= "";
+            text += "screen:(" + e.screenX + "," + e.screenY + ")<br>";
+            text += "client:(" + e.clientX + "," + e.clientY + ")<br>";
+            text += "offset:(" + e.offsetX + "," + e.offsetY + ")<br>";
+            text += "x,y:(" + e.x + "," + e.y + ")<br>";
+            div.innerHTML = text;
+        }
+    </script>
+</body>
+</html>

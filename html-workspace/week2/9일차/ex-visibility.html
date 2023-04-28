@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>visibility</title>
+    <style>
+        .a{ visibility: visible;}
+        .b{ visibility: hidden;}
+        .c{ display: none;}   /* 반대 block */
+    </style>
+    <script>
+        function fn_view(){
+            let obj = document.getElementById('b');
+            if(obj.style.visibility == 'hidden'){
+                obj.style.visibility = 'visible';
+              let c = document.getElementById('c');
+              c.style.display='block' ;
+            }else{
+                obj.style.visibility = 'hidden'
+                let c = document.getElementById('c');
+              c.style.display='none' ;
+            }
+          
+        }
+    </script>
+</head>
+<body>
+    <h3>CSS 속성 visibility 와 none 차이</h3>
+    <hr>
+    <h2 class="a"> This is visible (보임)</h2>
+    <h2 class="b" id="b"> This is hidden (안보임)</h2>
+    <h2 class="c" id="c"> This is display none(영역도 없어짐)</h2>
+    <input type="button" value="보임" onclick="fn_view()">
+</body>
+</html>

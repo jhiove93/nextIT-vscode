@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애니메이션 효과</title>
+    <style>
+        #container{position: relative; list-style: none; margin: 0; padding: 0;}
+        #container img{ margin: 0; padding: 0; float: left; z-index: 1;}
+        #circle1 {position: absolute; width: 500px; height: 480px;
+                  border-radius:  300px; padding-top:20px;
+                  background: rgba(0, 0, 0, 0.527);
+                  transition:all 0.2s ease-in-out;
+                  z-index: 2;}
+        #container:hover #circle1{ opacity: 0; transform: translateY(250px);}
+        #circle1 p{font-size:50px; color:white; text-align: center;} 
+    </style>
+</head>
+<body>
+    <div id="container">
+        <img src="images/earth.png" width="500px" id="earth"  alt="">
+        <div id="circle1">
+            <p>지구 입니다.</p>
+        </div>
+    </div>
+</body>
+</html>

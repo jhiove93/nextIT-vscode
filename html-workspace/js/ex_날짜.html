@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date 객체로 현재시간 가져오기</title>
+    <script>
+        let now = new Date();
+        document.write("현재시간 : ", now.toUTCString() + "<br>");
+        document.write("년도: ", now.getFullYear() + "<br>");
+        document.write("월: ", now.getMonth()+1 + "<br>");
+        document.write("일: ", now.getDate() + "<br>");
+        document.write("시간: ", now.getHours() + "<br>");
+        document.write("분: ", now.getMinutes() + "<br>");
+        document.write("getTime: ", now.getTime() + "<br>");
+        // 유닉스 타임스탬프 값
+        // 유닉스 타임스탬프는 : 1970년 1월 1일 00:00:00 UTC(협정 세계시)부터
+        // 현재까지 경과한 시간을 밀리초 단위로 나타낸것
+
+        let dday = new Date(now.getFullYear(),11, 31); //올해 마지막날
+        let diffDate = dday.getTime() - now.getTime(); //
+        console.log("diffdate:" , diffDate) ;
+        let result = Math.ceil(diffDate/(1000*60*60*24));
+                                        //밀리초,초,분,시
+        console.log('result:' , result);
+        document.write("<h1>오늘 부터 마지막 날까지 남은 날짜<h1>")
+        document.write("<h1>D-day " + result +"일 남았습니다.")
+
+        </script>
+</head>
+<body>
+    
+</body>
+</html>

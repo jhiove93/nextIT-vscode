@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로꾸꺼</title>
+    <!--텍스트를 입력 받아 거꾸로 출력하시오-->
+    <script>
+        let msg = prompt("입력하세요!!: ");
+
+
+        // 거꾸로 출력값
+        let re = msg.split('').reverse();
+        let be = ""; 
+        for(let v of re){
+            be += v;
+        }
+        document.write("<h1>입력값 : "+ msg+ "</h1>");
+        document.write("<h1>거꾸로출력값 : "+ be + "</h1>");
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 주석 ctrl + / 
+        /*
+          주석공간
+          */
+        //   자바스크립트 사용(2) script로 열고 닫은 공간에 작성
+       function fn_over(obj){
+            console.log('콘솔에 프린트됨.')
+            console.log(obj);
+            obj.src = 'pic/사과.png';
+       }
+       function fn_out(obj){
+            obj.src = 'pic/수박.png';
+       }
+    </script>
+</head>
+<body>
+    <h3>마우스를 올려 보세요</h3>
+    <hr>
+    <img src="pic/바나나.png" alt="" onmouseover="fn_over(this)"
+                                   onmouseout="fn_out(this)">
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>checkbox 다중선택</title>
+</head>
+<body>
+    <div>
+        <h3>취미를 선택하세요</h3>
+        <!-- 전체의 체크박스가 change 이벤트가 일어나면
+            해당 체크박스의 checked의 값을 가져와서 (true 전체선택 , false 전체해제)
+            hobby 체크박스의 상태가 동일하게 만들어주세요
+
+        -->
+        <label for="p_all">전체</label><input type="checkbox" id="p_all" onclick="fn_allcheck(this)">
+    </div>
+    <div>
+        <label for="">독서</label><input type="checkbox" name="hobby" value="read">
+        <label for="">요리</label><input type="checkbox" name="hobby" value="cook">
+        <label for="">게임</label><input type="checkbox" name="hobby" value="game">
+        <label for="">서핑</label><input type="checkbox" name="hobby" value="surf">
+        <input type="button" value="확인" onclick="fn_check()">
+    </div>
+    <script>
+        function fn_check(){
+            let obj = document.getElementsByName('hobby');
+            let msg = "당신의 취미는";
+            for(i in obj){
+                if(obj[i].checked){
+                    msg += obj[i].value + ":" +obj[i].previousElementSibling.innerHTML; 
+                }
+            }
+            alert(msg + " 입니다");
+        }
+        function fn_allcheck(obj){
+            let hobby = document.getElementsByName('hobby');
+            let flag = false;
+            if(obj.checked){ // all checkbox의 checked 값
+                flag = true;
+            }
+            for(let i of hobby){ // hobby name 을 가지고잇는 checkbox 값을 all checkbox랑 동일하게.
+                i.checked = flag;
+            }
+            
+        }
+    </script>
+</body>
+</html>
