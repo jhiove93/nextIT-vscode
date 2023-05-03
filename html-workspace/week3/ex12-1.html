@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쿠키</title>
+    <script>
+        function SetCookie(name,val,expireDate){
+            let cookieStr = name + "=" + escape(val) +
+             ((expireDate == null) ? "" :  ("; expires=" + expireDate.toUTCString()));
+             document.cookie = cookieStr;
+        }
+        function GetCookie(name){
+            let str = name + "=";
+            // cookie 문자열을 ; 기준으로 자르기
+            let pairs = document.cookie.split(";");
+            for(let i = 0 ; i < pairs.length ; i++){
+                let pair = pairs[i].trim();
+                // key value 나누기위해 = 기준으로 자르기 
+                let unit = pair.split("=");
+                // key 같으면 
+                if(unit[0]==name){
+                    //value 리턴
+                    return unescape(unit[1]);
+                }
+            }
+        }
+        let username= GetCookie('username');
+        let count = GetCookie('count');
+        // 쿠키에 username 없으면 새로 방문 
+        let expire = new Date();
+        if(username == null){
+            count = 0;
+            username = prompt('닉네임을 입력해주세요^^ . ',"");
+            while(true){
+                if(username == null || username ==''){
+                    alert("닉네임을 입력해야 합니다....")
+                }else{
+                    expire.setTime(expire.getTime() + (365 * 24 * 60 * 60 *1000)); // 1년후 
+                    SetCookie("username",username,expire);
+                    break;
+                }
+            }
+        }
+        count++;
+        expire.setTime(expire.getTime(+(365*24*60*60*1000)));
+        SetCookie('count', count , expire);
+        document.write("<p> 어서오세요"+ username + "님 " + count + "번째 방문을 환영합니다.")
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

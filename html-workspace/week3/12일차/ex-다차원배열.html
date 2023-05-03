@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>다차원 배열</h3>
+    <hr>
+    <script>
+        let arr = [[101,102,103],[201,202,203],[301,302,303]];
+        function fn_print(msg,arr){
+            document.write(msg + arr.toString()+"<br>");
+        }
+        fn_print('arr:',arr);
+        fn_print('arr[0]',arr[0]);
+        fn_print('arr[1],[0]',arr[1][0]);
+        arr.push([401,402,403]);
+        fn_print('arr.length',arr.length);
+        fn_print('arr[0].length', arr[0].length);
+        for(let i= 0 ; i<arr.length; i++){
+            for(let j = 0; j <arr[i].length; j++){
+                fn_print(i + "," + j + ":",arr[i][j]);
+            }
+        }
+    </script>   
+</body>
+</html>

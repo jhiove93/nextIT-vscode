@@ -15,19 +15,27 @@
                          ,'박혜라','배준호','백민기','신경호','유동윤','윤종현','이자영','장유정','정현진','주예슬'
                          ,'최성복','홍민경'];
         // 점심식사 팀
-
+        /* 문제 : 인원 랜덤, 메뉴 랜덤으로 할당.
+                 1. 학생인원을 랜덤하게 선택
+                 2. 메뉴를 랜덤하게 선택
+                 3. 메뉴를 기준으로 해당 학생을 할당.
+        */
 
         let objTeam = {};
-        
-        let P = {};
-        mate = classMate[Math.floor(Math.random()*classMate.length)];
-        P.push(mate);
-        let mate = classMate[Math.floor(Math.random()*classMate.length)];
-        for(let i = 0 ; i < menus.length; i++){
-            objTeam[menus[i]]= P;
+        // {'맥날' : ['팽수','길동']}
+
+
+        let arr;
+        while(classMate.length != 0){  // splide 로 하나씩 가져오기위해 0이될때까지 while 돌림
+        let cls_idx = Math.floor(Math.random()*classMate.length);
+        let menu_idx = Math.floor(Math.random()*menus.length);
+        // 랜덤하게 뽑은 메뉴명 
+        let menu = menus[menu_idx];
+        arr = objTeam[menu] == undefined ? [] : objTeam[menu] 
+        arr.push(classMate[cls_idx]);
+        classMate.splice(cls_idx,1);
+        objTeam[menu] = arr;
         }
-
-
 
 
         document.write("<h1> 오늘의 점심 메뉴 팀<h1><br>")

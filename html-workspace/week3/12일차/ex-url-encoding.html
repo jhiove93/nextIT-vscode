@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인코딩과 디코딩</title>
+    <!--
+        인코딩은 문자를 컴퓨터에 저장하거나 통신에 사용할 목적으로 부호화하는 방법
+        1.escape() 영문, 알파벳, 숫자, 일부(@,*,+..) 특수문자 제외하고 인코딩
+          unescape() 디코딩
+        2.encodeURI() 인터넷 주소에서 사용되는 일부 특수 무자 제외하고(:,;,/,=..)
+         인코딩함 
+         decodeURI() 디코딩
+        3. encodeURIComponent() 알파벳과 숫자 제외한 모든 문제 인코딩(UTF-8) 과같음
+          decodeURIComponent() 디코딩
+    -->
+    <!-- --https://www.google.com/search?q=%EA%B3%A0%EB%9E%98%EC%83%81%EC%96%B4 -->
+    <!-- --https://www.google.com/search?q=%EA%B3%A0%EB%9E%98%EC%83%81%EC%96%B4 -->
+    <script>
+        let url = 'https://www.google.com/search?q=고래상어'
+        let output = "";
+        let escape_q = escape(url);
+        let encodeURI_q = encodeURI(url);
+        let encodeURIComponent_q = encodeURIComponent(url);
+        document.write("인코딩----------------------------------------------<br>");
+        output += "1 : " + escape_q + "<br>";
+        output += "2 : " + encodeURI_q + "<br>";
+        output += "3 : " + encodeURIComponent_q + "<br>";
+        document.write(output);
+        document.write("디코딩----------------------------------------------<br>");
+        output="";
+        output += "1 : " + unescape(escape_q) + "<br>";
+        output += "2 : " + decodeURI(encodeURI_q) + "<br>";
+        output += "3 : " + decodeURIComponent(encodeURIComponent_q) + "<br>";
+        document.write(output);
+        document.write("http://www.google.co.kr/serch?q=" + decodeURI('고래상어')+"<br>");
+        document.write(decodeURI("%EA%B3%A0%EB%9E%98%EC%83%81%EC%96%B4"));
+        function fn_check(){
+            let input = document.getElementById("q_id");
+            input.value = decodeURI(input.value);
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <form action="http://www.google.co.kr/serch" method="get" onsubmit="return fn_check()" >
+        <input type="text" name="q" id="q_id">
+        <input type="submit" value="전송">
+    </form>
+</body>
+</html>
