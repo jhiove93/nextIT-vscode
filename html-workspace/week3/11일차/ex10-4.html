@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setInterval</title>
+</head>
+<body>
+    <h3>텍스트가 자동 회전하며, 마우스로 클릭하면 중단됩니다.</h3>
+    <hr>
+    <div><span id="content_id" style="background-color: yellow;">
+            자동 회전하는 텍스트 입니다.</span></div>
+    <script>
+        let content = document.getElementById('content_id');
+        let timerId = setInterval('fn_rotate()',100);
+        content.onclick = function(){
+            clearInterval(timerId); // interval 종료
+        }
+        function fn_rotate(){
+            let str = content.innerHTML;
+            let firstChar = str.substr(0,1);  // 1, 1 동일
+            let lastChar = str.substr(1,str.length -1);
+            str = lastChar + firstChar;
+            content.innerHTML = str;
+        }
+
+    </script>
+</body>
+</html>

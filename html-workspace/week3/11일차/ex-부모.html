@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부모창 데이터 전달</title>
+    <script>
+        let newWin = null;
+        function fn_open(URL){
+            newWin = window.open(URL, 'newWIn','');
+            newWin.onload = function(){
+                newWin.document.getElementById('newWin_id').value = document.getElementById('p_id').value;
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <h3> 부모창 데이터-> 자식창으로</h3>
+    <hr>
+    부모에서 -> 자식으로 : <input type="text" id="p_id"><br>
+    자식에서 -> 부모로   : <input type="text" name="" id="c_id" readonly>
+    <button onclick="fn_open('ex-자식.html')">자식 열기</button>
+</body>
+</html>

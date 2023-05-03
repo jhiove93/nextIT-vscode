@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열 다루기</title>
+    <script>
+        let menus = ['중국집','맛고을','버거킹','다이어트','막걸리&파전','고등어백반','서브웨이'];
+        let content = null;
+        window.onload = function(){
+            content = document.getElementById("content_id");
+        }
+        function fn_print(){
+            fn_del();
+            for(let i = 0 ; i < menus.length; i++){
+                let msg = menus[i];
+                let P = document.createElement('p')
+                P.innerHTML = msg;
+                content.appendChild(P);
+                 
+            }
+        }
+        function fn_add(){
+            // push 배열 끝에 아이템 추가
+            let i = document.getElementById("menus").value;
+            menus.push(i);
+            document.getElementById("menus").value = "";
+            fn_print();  // 추가하고 조회다시 하게
+        }
+        function fn_del(){
+            while(true){
+                let child = content.children;
+                if(child.length==0){
+                    break;
+                }else{
+                    content.removeChild(child[0]);
+                }
+            }
+            // for(let i = 0 ; i < menus.length ; i++){
+                // content.removeChild(child[i]);
+            // }
+        }
+        function fn_pop(){
+            // 뒤에 삭제
+            menus.pop();
+            fn_print();
+        }
+        function fn_shift(){
+            // 앞에 삭제
+            menus.shift();
+            fn_print();
+        }
+        function fn_one_del(){
+            let m = document.getElementById("menus").value;
+            for(let i = 0 ; i < menus.length; i++){
+                if(menus[i].includes(m)){
+                    menus.splice(i,1);
+                }
+            }
+            fn_print();
+        }
+        function fn_two_del(){
+            let m = document.getElementById("menus").value;
+            if(menus.indexOf(m)== 1){
+                for(let i = 0 ; i < menus.length ; i++ ){
+                    if(menus[i].includes(m)){
+                        menus.splice(i,1);
+                        fn_print();
+                    }
+                }
+            }else{
+                alert(m+"라는 메뉴가 들어가있지 않습니다.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="menus">
+    <button onclick="fn_add()">추가</button>
+    <button onclick="fn_print()">조회</button>
+    <button onclick="fn_del()">화면 삭제</button>
+    <button onclick="fn_pop()">뒤에 삭제</button>
+    <button onclick="fn_shift()">앞에 삭제</button>
+    <button onclick="fn_one_del()">지우기</button>
+    <button onclick="fn_two_del()">쓴값이 확실하면지우기</button>
+    <div id="content_id"></div>
+    
+</body>
+</html>

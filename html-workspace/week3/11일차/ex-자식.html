@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자식 window</title>
+    <script>
+        function fn_send(){
+            // 부모창 window
+            opener.document.getElementById('c_id').value = document.getElementById('send_id').value;
+        }
+        function fn_close(){
+            // opener.close(); // 부모창 닫기
+            window.close(); // 내창 닫기
+        }
+    </script>
+</head>
+<body>
+    <h3> 자식 창</h3>
+    <hr>
+    부모에서 전달됨 : <input type="text" id="newWin_id" readonly><br>
+    부모로 전달 : <input type="text" id="send_id">
+    <button onclick = "fn_send()">전송</button>
+    <button onclick="fn_close()">닫기</button>
+</body>
+</html>
