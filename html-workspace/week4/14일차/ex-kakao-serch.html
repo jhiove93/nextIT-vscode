@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kakao daum 검색</title>
+    <script>
+        let url = "https://dapi.kakao.com/v2/search/web?sort=accuracy&page=1&size=10&query=";
+        let headers = {"Autborization": "KakaoAK 2f6a04ddd6a96cf534e88b1af9d5d593"}; //rest api key
+        let httpRequest = new XMLHttpRequest();
+        function fn_ajax(){
+            let q = document.getElementById('q').value;
+            // 검색 클릭시 함수 호출되도록
+            alert(q);
+            httpRequest.onreadystatechange =function(){
+                if(httpRequest.readyState == 4 & httpRequest.status ==200){
+                    console.log(httpRequest.responseText);
+                }
+            }
+            httpRequest.open('GET', url+q)
+            httpRequest.setRequestHeader("Content-Type", "application/json");
+            httpRequest.setRequestHeader("Autborization","KakaoAK 2f6a04ddd6a96cf534e88b1af9d5d593");
+            httpRequest.send();
+        }
+    </script>
+</head>
+<body>
+    검색어  :<input type="text" id="q"> <input type="button" onclick="fn_ajax()" value="검색" >
+</body>
+</html>

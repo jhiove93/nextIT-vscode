@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>indexOf, includes </title>
+    <script>
+        // indexOf는 배열속에 원하는 값이 있는 인덱스 반환 
+        //                              없을경우 -1 반환 
+        let arr = ["팽수", "길동", "호동"];
+        console.log(arr.indexOf('길동'));
+        console.log(arr.indexOf('홍길동'));
+
+        console.log(arr[1].includes('길'));
+        console.log(arr[1].includes('홍'));
+        // 특정 인덱스 삭제 
+        arr.splice(1, 1); // splice(a, b) a 번째 부터 b length만큼 삭제 
+        console.log(arr);
+
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>

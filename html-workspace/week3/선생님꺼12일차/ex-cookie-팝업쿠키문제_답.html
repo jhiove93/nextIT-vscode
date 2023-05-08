@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쿠키</title>
+    <style>
+        *{
+            text-align: center;
+            position: relative;
+            top: 50px;
+        }
+        body{
+            background-color: black;  /* 원하는 배경색 */
+        }
+        .date{
+            font-size:10;  /* 원하는 폰트 사이즈 */
+            color: blue; /* 날짜가 표기되는 텍스트 색상 */
+        }
+        .time{
+            font-size: 10;  /* 원하는 폰트 사이즈 */
+            font-weight: bold;
+            color:purple  /* 시간이 표기되는 텍스트 색상 */
+        }
+
+
+    </style>
+    <script>
+        function setClock(){
+            var dateInfo = new Date(); 
+            var hour = modifyNumber(dateInfo.getHours());
+            var min = modifyNumber(dateInfo.getMinutes());
+            var sec = modifyNumber(dateInfo.getSeconds());
+            var year = dateInfo.getFullYear();
+            var month = dateInfo.getMonth()+1; //monthIndex를 반환해주기 때문에 1을 더해준다.
+            var date = dateInfo.getDate();
+            document.getElementById("time").innerHTML = hour + ":" + min  + ":" + sec;
+            document.getElementById("date").innerHTML = year + "년 " + month + "월 " + date + "일";
+        }
+        function modifyNumber(time){
+            if(parseInt(time)<10){
+                return "0"+ time;
+            }else{
+                return time;
+            }
+        }
+        window.onload = function(){
+            setClock();
+            setInterval(setClock,1000); //1초마다 setClock 함수 실행
+        }
+    </script>
+</head>
+<body>
+    <h3 style="color: aliceblue;">메인화면</h3>
+    <div id="time" class="time"></div>
+    <div id="date" class="date"></div>
+    <script>
+       
+        function GetCookie(name){
+            let str = name + "=";
+            let pairs = document.cookie.split(';'); 
+            for(let i =0 ; i < pairs.length; i++){
+                let pair = pairs[i].trim(); //  공백제거 
+                let unit = pair.split("=");
+                if(unit[0] == name){
+                    return unescape(unit[1]);
+                }
+            }
+        }
+
+         function fn_pop(){
+            window.open("ex-cookie-pop.html","myPop",  "width=400,height=300,left=500,top=200");
+         }
+         
+         let pop = GetCookie('pop');
+         
+         console.log(pop);
+         if(pop == undefined || pop == 'N'){
+            fn_pop();            
+         }
+    </script>    
+  
+</body>
+</html>

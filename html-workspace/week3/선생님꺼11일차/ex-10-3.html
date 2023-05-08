@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setTimeout</title>
+</head>
+<body>
+    <h3>이미지에 마우스를 올리고 5초 뒤면 해당 사이트로 이동합니다.</h3>
+    <hr>
+    <img id="img" src="naver.png" alt="" onmouseover="fn_start(3000)" onmouseout="fn_cancel()">
+    <script>
+        let timerId = null;
+        function fn_load(URL){
+            window.location = URL;   // 현재 윈도우에서 이동 
+        }
+        function fn_cancel(){
+            if(timerId != null){
+                clearTimeout(timerId); // 타이머 중단 
+            }
+        }
+        function fn_start(time){
+            timerId = setTimeout("fn_load('http://www.naver.com')", time);
+            document.getElementById('img').title = '타이머 작동 시작....';
+        }
+    </script>
+</body>
+</html>

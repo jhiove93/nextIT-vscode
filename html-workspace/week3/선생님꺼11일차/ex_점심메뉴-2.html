@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>오늘은 뭘 먹을까?</h3>
+    <hr>
+    <script>
+        let menus = ['중국집','맛고을','버거킹','다이어트','막걸리&파전','고등어백반','서브웨이'];
+        let classMate = ['강지혜','고동욱','김대일','김청아','김태윤','김현곤','류서영','박준하','박진영','박창연'
+                        ,'박혜라','배준호','백민기','신경호','유동윤','윤종현','이자영','장유정','정현진','주예슬','최성복','홍민경'];
+
+        // 점심식사 팀
+        let objTeam = {};
+        // 학생 메뉴 랜덤 할당(menus의 인덱스로)
+        let arrMate = [];
+        // 팀 인원은 1 ~ 4 
+
+        for(i of menus){
+            objTeam[i] = [];
+        }
+        //push :배열 끝에 아이템 추가
+        //pop 마지막 아이템 제거 
+        //shift 첫 아이템 제거
+        //unshift() 아이템 추가(배열 첫번째에)
+        //splice(pos, length) pos 번째 부터 length 만큼 아이템 제거 
+        //slice(배열 복제)
+        while(classMate.length > 0){
+            let hak_index = Math.floor(Math.random() * classMate.length);
+            for(let i = 0; i < classMate.length; i++){
+                let menu_index =  Math.floor(Math.random() * menus.length);
+                if(i === hak_index){
+                    let arr = objTeam[menus[menu_index]];
+                    if(arr.length ==4){
+                        break;
+                    }
+                    arr.push(classMate[hak_index]);
+                    objTeam[menus[menu_index]] = arr;
+                    classMate.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+        console.log(objTeam);
+      
+        
+        document.write("<h1> 오늘의 점심 메뉴 팀<h1><br>")
+        for(let i = 0 ; i < Object.keys(objTeam).length; i++){
+            document.write("<h3>"+ menus[i]+ "팀은 :" +objTeam[menus[i]]+" </h3>");
+        }
+        document.write("<button onclick='location.reload();'>다시 추첨</button>");
+    </script>
+</body>
+</html>

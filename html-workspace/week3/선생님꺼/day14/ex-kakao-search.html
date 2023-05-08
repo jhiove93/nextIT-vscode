@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kakao daum 검색</title>
+    <script>
+        let url = "https://dapi.kakao.com/v2/search/web?sort=accuracy&page=1&size=10&query="
+        let httpRequest = new XMLHttpRequest();
+        function fn_ajax(){
+            // 검색 클릭시 함수 호출되도록 
+            let q = document.getElementById('q').value;
+            httpRequest.onreadystatechange = function(){
+                if(httpRequest.readyState == 4 & httpRequest.status == 200){
+                    console.log(httpRequest.responseText);
+                    let obj = JSON.parse(httpRequest.responseText);
+                    console.log(obj);
+                    let arr = obj.documents;
+                    let str ="";
+                    for(let i in arr){
+                        console.log(arr[i]['contents']);
+                        console.log(arr[i]['title']);
+                        console.log(arr[i]['url']);
+                        str += '<p>'
+                        str += '<span>'        
+                        str += arr[i]['contents'];                     
+                        str += '</span>'                
+                        str += '<a href="'+arr[i]['url']+'">'        
+                        str += arr[i]['title'];                     
+                        str += '</a>'                      
+                        str += '</p>'
+                    }
+                    document.getElementById('contents').innerHTML = str;
+                }
+            }
+            httpRequest.open('GET', url+q);
+            httpRequest.setRequestHeader("Content-Type", "application/json");
+            httpRequest.setRequestHeader("Authorization", "KakaoAK 2f6a04ddd6a96cf534e88b1af9d5d593");
+            httpRequest.send();
+        }
+    </script>
+</head>
+<body>
+    검색어 : <input type="text" id="q"><input type="button" onclick="fn_ajax()" value="검색">
+    <div id="contents"></div>
+</body>
+</html>

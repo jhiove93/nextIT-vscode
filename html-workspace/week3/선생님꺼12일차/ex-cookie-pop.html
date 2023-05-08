@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>팝업</title>
+    <script>
+        function SetCookie(name, val, expireDate) {
+            let cookieStr = name + "=" + escape(val) +
+                ((expireDate == null) ? "" : ("; expires=" + expireDate.toUTCString()));
+            document.cookie = cookieStr;
+        }
+        function fn_check(){
+
+            let now = new Date();
+            if(document.getElementsByName('chb')[0].checked){
+                now.setTime(now.getTime() + (1 * 60 * 1000))
+                SetCookie('pop', 'Y', now);
+                window.close();
+            }else{
+                now.setTime(now.getTime() + (365 * 24 * 60 * 60 * 1000));
+                SetCookie('pop', 'N', now);
+                window.close();
+            }
+        }
+
+
+    </script>
+</head>
+<body>
+    <h3> 공지사항 !!!</h3>
+    <h4> 공지내용 입니다......</h4>
+    <hr>
+    2분 동안은 다시 안보기 <input type="checkbox" name="chb">
+    <button id="btn" onclick="fn_check()">닫기</button>
+</body>
+</html>

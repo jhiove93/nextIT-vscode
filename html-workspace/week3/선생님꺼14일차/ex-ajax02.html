@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body{ margin: 0; padding: 0; }
+        #left_table { float: left; width: 50%; }
+        #right_table { float: left; width: 50%;}
+        table tr:nth-child(even){ background-color: bisque;}
+        table{text-align: center;}
+        table tr:hover{
+            background-color: cadetblue;
+        }
+    </style>
+    <script>
+        let httpRequest;
+        let info_url = "https://api.upbit.com/v1/market/all";
+        let detail_url = "https://api.upbit.com/v1/ticker?markets=";
+        function req_ajax(func, url){
+            httpRequest = new XMLHttpRequest();
+            if(!httpRequest){
+                alert("요청이 안됨.");
+                return ;
+            }
+            // 전달 받은 함수 적용 
+            httpRequest.onreadystatechange = func;
+            httpRequest.open('get', url);
+            httpRequest.send();
+        }
+        function coin_info(){
+            if(httpRequest.readyState === 4 && httpRequest.status == 200){
+                console.log(httpRequest.responseText);
+                // 1. coin_list 왼쪽 화면에 table 그리기 (저번시간 처럼)
+                let upbit_code_list = JSON.parse(httpRequest.responseText);
+                console.log(upbit_code_list);
+                let str;
+                str = "<tr><th>한글명</th><th>영문명</th><th>코드</th><tr>";
+                for(let i in upbit_code_list){
+                    // str +="<tr onclick=req_ajax(coin_detail,detail_url+'"+upbit_code_list[i].market +"') >";
+                    str +="<tr>";
+                    str +="<td>" + upbit_code_list[i].korean_name + "</td>";
+                    str +="<td>"+ upbit_code_list[i].english_name + "</td>";
+                    str +="<td>"+ upbit_code_list[i]['market'] + "</td>";
+                    str +="</tr>";
+                }
+                // table coin_list에 응답받은 데이터를 테이블로 출력하시오 
+                // tr, td를 활용하여 ^^
+                document.getElementById('coin_list').innerHTML = str;
+                // 2.tr 클릭시 해당 market 정보로 coin_detail 요청 
+            }
+        }
+        function coin_detail(){
+            if(httpRequest.readyState === 4 && httpRequest.status == 200){
+                console.log(httpRequest.responseText);
+               
+                 // 3.오른쪽 화면에 상세정보 출력 
+                let obj = JSON.parse(httpRequest.responseText);
+                console.log(obj);
+                console.log(obj[0]);
+                let str;
+                str = "<tr><th>내용</th><th>값</th></tr>";
+                for(let key in obj[0]){
+                    str +="<tr>";
+                    str +="<td>" +key + "</td>";
+                    str +="<td>"+ obj[0][key] + "</td>";
+                    str +="</tr>";
+                }
+                document.getElementById('coin_detail').innerHTML = str;
+            }
+        }
+        window.onload = function(){
+            req_ajax(coin_info, info_url);
+            // table에 click 이벤트 적용 
+            let table = document.getElementById('coin_list');
+            table.onclick = function(e){
+                let coincode = e.target.parentElement.children[2];
+                req_ajax(coin_detail, detail_url + coincode.innerHTML);
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div class="row">
+        <div id="left_table">
+            <table id="coin_list"></table>
+        </div>
+        <div id="right_table">
+            <table id="coin_detail"></table>
+        </div>
+    </div>
+</body>
+</html>

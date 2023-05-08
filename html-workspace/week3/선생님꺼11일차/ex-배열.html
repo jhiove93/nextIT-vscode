@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열 다루기</title>
+    <script>
+        let menus = ['중국집','맛고을','버거킹','다이어트','막걸리&파전','고등어백반','서브웨이'];
+        let content = null; 
+        window.onload = function(){
+            content = document.getElementById('content_id');
+        }
+        function fn_print(){
+            fn_del();
+            for(let v of menus){
+                let P = document.createElement('P');
+                P.innerHTML =v;
+                content.appendChild(P);
+            }
+        }
+        function fn_add(){
+            // push 배열 끝에 아이템 추가 
+            menus.push(document.getElementById('menus').value);
+            document.getElementById('menus').value = '';
+        }
+
+        function fn_del(){
+           while(true){
+             let child = content.children;
+                if(child.length == 0){
+                    break;
+                }else{
+                    content.removeChild(child[0]);
+                }
+             }
+        }
+        function fn_pop(){
+            // 뒤에 삭제 
+            menus.pop();
+            // 다시출력
+            fn_print();
+        }   
+        function fn_shift(){
+            // 앞에 삭제
+            menus.shift();
+            // 다시출력
+            fn_print();
+        } 
+        function fn_one_del1(){
+            let menu = document.getElementById('menus').value;
+            document.getElementById('menus').value ='';
+            let idx = menus.indexOf(menu);
+            if( idx > -1){
+                menus.splice(idx, 1);
+                content.removeChild[idx];
+                fn_print();
+            }else{
+                alert("없음");
+            }
+        }
+        function fn_one_del2(){
+            let menu = document.getElementById('menus').value;
+            for(let i in menus){
+                if(menus[i].includes(menu)){
+                    alert(menu + ":포함->" +menus[i] );
+                    menus.splice(i, 1);
+                    content.removeChild[i];
+                    fn_print();
+                    break;
+                }
+            }
+        }
+        
+    </script>
+</head>
+<body>
+    <input type="text" id="menus" >
+    <!-- 추가 클릭시 input value 추가 -->
+    <button onclick="fn_add()">추가</button>
+    <button onclick="fn_print()">조회</button>
+    <button onclick="fn_del()">화면삭제</button>
+    <button onclick="fn_pop()">뒤에 삭제</button>
+    <button onclick="fn_shift()">앞에 삭제</button>
+    <button onclick="fn_one_del1()">하나만 삭제1</button>
+    <button onclick="fn_one_del2()">하나만 삭제2</button>
+    <div id="content_id"></div>
+</body>
+</html>
