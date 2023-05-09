@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <title>Document</title>
+    <script>
+        $(document).ready(function(){
+            $("#btn").click(function(){
+                // alert($("#target").val());
+                $('#p_id').html('<span>'+$("#target").val()+'</span>')
+            });
+            $("#btn_append").click(function(){
+                $('#p_id').append('<span>'+$("#target").val()+'</span>')
+            });    
+            $("#btn_prepend").click(function(){
+                $('#p_id').prepend('<span>'+$("#target").val()+'</span>')
+            }); 
+            //기존에 밑에 있던 span태그 클릭하면 삭제할때
+            $('span').click(function(){
+                $(this).remove();
+            });
+            // 동적으로 생성된 엘리먼트에 이벤트 적용하려면 on사용 
+            $(document).on('click','span',function(){
+                $(this).remove();
+            });
+        });
+    </script>
+</head>
+<body>
+    이름 : <input type="text" id="target"><br>
+    <button id="btn">get</button>
+    <button id="btn_append">append</button>
+    <button id="btn_prepend">prepend</button>
+    <p id="p_id"></p>
+    <span>hi span</span>
+</body>
+</html>
