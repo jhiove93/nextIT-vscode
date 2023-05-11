@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <title>Document</title>
+    <style>
+        div.out{width:200px; height: 200px;background-color: yellow;}
+    </style>
+    <script>
+        $(document).ready(function(){
+            let i =0;
+            $('div.out').mouseover(function(){
+                $("p:first").text('mouse over');
+                $('p:last').text(++i);
+            });
+            $('div.out').click(function(){
+                i = 0;
+                $('p:last').text(i);
+                // $(this).children().eq(1).text('클릭함');
+                $(this).find('p').eq(1).text('클릭함2'); // eq는 몇번째 찾는거 0 번쨰부터
+            })
+        });
+    </script>
+</head>
+<body>
+    <div class="out">
+        <p>마우스를 올리세요</p>
+        <p>가운데</p>
+        <p>0</p>
+    </div>
+</body>
+</html>

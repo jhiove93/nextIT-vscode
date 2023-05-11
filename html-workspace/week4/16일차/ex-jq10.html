@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <title>Document</title>
+    <script>
+        $(document).ready(function () {
+            $('button').click(function () {
+                $.ajax({
+                    url: "https://dapi.kakao.com/v2/local/search/address.json"
+                    , headers: { 'Authorization': 'KakaoAK 2f6a04ddd6a96cf534e88b1af9d5d593' }
+                    , dataType: "json"
+                    , data: { 'query': $('#q').val() }
+                    , type: 'GET'
+                    , success: function (res) {
+                        //비우기 
+
+                        let dataset = res['documents'];
+                        if(dataset.length == 0 ){
+                            $('#contents').append('<p>조회 결과 없음</p>');
+
+                        }else{
+                            console.log(dataset);
+                            for (let i in dataset) {
+                                $('#contents').append('<p><span>'
+                                    + dataset[i]['address']['address_name']
+                                    + '</span><span>x:' + dataset[i]['x']
+                                    + '</span><span>y:' + dataset[i]['y'] + '</span></p>');
+                            }
+                        }
+                    }
+                    , error: function (e) {
+                        console.log(e)
+                    }
+                    , complete: function () {  //무조건탐  써도되고 안써도됨
+                        console.log('종료');
+                    }
+                })
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+    <input type="text" id="q">
+    <button>get data</button>
+    <div id="contents" style="width: 500px; height: 500px;"></div>
+</body>
+
+</html>
