@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>Document</title>
+    <style>
+        :root {
+           --color-white: #f5f8ea;
+          --color-white-shadow-1: #96c6d9;
+          --color-white-shadow-2: #e1eef2;
+          --color-blue: #0d5299;
+          
+        }
+        
+        body {
+          background-color: var(--color-white-shadow-1);
+        }
+        
+        #title {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          width: 97%;
+          height: 1000px;
+          border: 30px double var(--color-blue);
+          color: var(--color-blue);
+          text-shadow: 1px 1px 0 var(--color-white);
+        }
+        
+        #title h2 {
+          font-family: "Yellowtail", sans-serif;
+          padding: 10px 20px 0;
+          font-weight: 400;
+          font-size: 20px;
+          background-color: var(--color-white);
+          margin-bottom: -6px;
+          line-height: 1;
+          z-index: 1;
+          border: 6px solid var(--color-blue);
+          border-bottom: 6px solid var(--color-blue);
+        }
+        
+        #title h1 {
+          font-size: 40px;
+          font-family: "Josefin Sans", cursive;
+          text-transform: uppercase;
+          font-weight: 200;
+          background-color: var(--color-white);
+          padding: 20px 20px 0;
+          border: 6px solid var(--color-blue);
+          margin-bottom: 40px;
+        }
+        
+        button {
+          font-size: 16px;
+          font-family: "Josefin Sans", cursive;
+          text-transform: uppercase;
+          font-weight: 700;
+          padding: 10px 20px 6px;
+          color: var(--color-blue);
+          background-color: var(--color-white);
+          border: 6px solid var(--color-blue);
+          transition: all 0.2s;
+          cursor: pointer;
+        }
+        
+        button:hover {
+          box-shadow: 6px 6px var(--color-blue);
+        }
+/*여기까지 일단메인틀*/
+        .layout {
+        width: 95%;
+        height: 90%;
+
+        display: grid;
+        grid:
+            "header header header" 20%
+            "leftSide body rightSide" 50fr
+            "footer footer footer" 30%
+            / 20% 50% 30%;
+        gap: 8px;
+        }
+
+.header { grid-area: header; }
+.leftSide { grid-area: leftSide; }
+.body { grid-area: body; }
+.rightSide { grid-area: rightSide; }
+.footer { grid-area: footer; }
+
+.leftSide, .body, .rightSide, .footer {
+        border: 6px double var(--color-blue);
+        background-color: var(--color-white);
+    }
+/*여기까지 레이아웃 */
+
+/* 레프트 사이드바*/
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
+}
+nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+nav a {
+  text-decoration: none;
+  font-size: 25px;
+  color: #ddd;
+  position: relative;
+  margin-bottom: 50px;
+  transition: all .2s;
+  overflow: hidden;
+}
+nav a:hover {
+  color: #fff;
+}
+nav a:last-child {
+  margin-bottom: 0px;
+}
+
+nav a::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #3067f1;
+  z-index: 99;
+  transition: all .4s cubic-bezier(0.7, 0, 0.3, 1);
+}
+nav a:hover::before {
+  left: 100%;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  margin-top: -2px;
+  left: 100%;
+  width: 100%;
+  height: 4px;
+  background: #3072c7;
+  transition: all .3s;
+  transition-delay: .4s;
+}
+nav a:hover::after {
+  left: 0%;
+}
+/* 레프트 사이드바 끝*/
+
+/*네비바 */
+#topMenu {            /* topMenu의 ID를 가진 태그의 스타일 지정*/
+        height: 100px; /*  topMenu의 높이를 30px로 설정(제대로 설정 안하면 아래 내용이 깨짐) */
+        width: 1050px; /*  topMenu의 넓이를 850px로 설정(제대로 설정 안하면 브라우져 넓이가 좁아지면 깨짐) */
+}/*  */
+#topMenu ul li {                       /*  topMenu의 ID를 가진 태그 안에 <ul> 태그 안에 <li> 태그의 스타일을 지정 */
+        list-style: none;           /*  <li> 태그는 위의 이미지처럼 목록을 나타내는 점을 없앤다  */
+        color: white;                /* 글씨 색을 흰색으로 설정 */
+        background-color: #3871ec;   /* 배경색을 진한 회색(RGB(2D,2D,2D)으로 설정 */
+        float: left;                /*  <li>태그들이 왼쪽에 흐르게 설정(그러면 아래있는 내용은 오른쪽으로 옴) */
+        line-height: 30px;           /* 글씨가 가운데로 오도록 설정하기 위해 한줄의 높이를 30px로 설정 */
+        vertical-align: middle;    /*   세로 정렬을 가운데로 설정(위의 line-height와 같이 설정 필요함) */
+        text-align: center;         /*  글씨 정렬을 가운데로 설정 */
+}
+#topMenu .menuLink {                               /*  topMenu 아이디를 가진 태그 안에 있는 menuLink 클래스 태그들의 스타일 설정 */
+        text-decoration:none;                      /*  링크(<a> 태그)가 가지는 기본 꾸밈 효과(밑줄 등)을 없앰 */
+        color: white;                               /* 폰트색을 흰색으로 설정 */
+        display: block;                            /*  링크를 글씨가 있는 부분 뿐만아니라 전체 영역을 클릭해도 링크가 걸리게 설정 */
+        width: 150px;                             /*  메뉴링크의 넓이 설정 */
+        font-size: 12px;                           /*  폰트 사이즈 12px로 설정 */
+        font-weight: bold;                        /*  폰트를 굵게 */
+        font-family: "Trebuchet MS", Dotum, Arial;  /* 기본 폰트 적용, 시스템 폰트를 종류별로 순서대로 */
+}
+#topMenu .menuLink:hover {            /* topMenu 아이디를 가진 태그 안에 menuLink클래스를 가진 태그에 마우스가 over되면 스타일 설정 */
+        color: red;                    /* 글씨 색을 붉은색으로 설정 */
+        background-color: #4d4d4d;    /*  배경색을 조금 더 밝은 회색으로 설정 */
+}
+</style>
+        
+</head>
+<body>
+    <div id="title">
+        <section class="layout">
+            <div class="header">
+              <nav id="topMenu" >
+                <ul>
+                        <li><a class="menuLink" href="#">About us</a></li>
+                        <li><a class="menuLink" href="#">Ministries</a></li>
+                        <li><a class="menuLink" href="#">Community</a></li>
+                        <li><a class="menuLink" href="#">Locations</a></li>
+                        <li><a class="menuLink" href="#">Blog</a></li>
+                </ul>
+        </nav>
+            </div>
+            <div class="leftSide">  
+                <nav>
+                    <a href="#!">
+                      <span>HOME</span>
+                    </a>
+                    <a href="#!">
+                      <span>ABOUT</span>
+                    </a>
+                    <a href="#!">
+                      <span>CONTACT</span>
+                    </a>
+                    <a href="#!">
+                      <span>FAQ</span>
+                    </a>
+                  </nav> 
+            </div>   <!-- 레프트사이드바끝-->
+            
+            <div class="body">3</div>
+            <div class="rightSide">4</div>
+            <div class="footer">5</div>
+        </section>
+    </div>
+</body>
+</html>
