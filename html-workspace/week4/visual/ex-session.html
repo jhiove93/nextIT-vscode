@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /* sessionStorage : 텝 또는 창을 닫으면 저장된 데이터가 삭제되는 일회성 저장공간
+            localStorage : 브라우저에 영구적으로 저장
+        
+        */
+       function fn_save(){
+        let item = document.getElementById('p_item');
+        let cnt = document.getElementById('p_cnt');
+        if(!window.sessionStorage){
+             alert("지원을 하지 않음...");
+             return;
+        }
+        sessionStorage.setItem(item.value,cnt.value);
+        item.value='';
+        cnt.value='';
+       }
+       function fn_search(){
+        let item_val = document.getElementById('p_item').value;
+        let val = window.sessionStorage.getItem(item_val);
+        let str='';
+        if(val ==null){
+            str += '없음';
+        }else{
+            str += 'key:' + item_val + ' value: '+val;
+        }
+        document.getElementById('p_div').innerHTML = str;
+
+       }
+    </script>
+</head>
+<body>
+    <h3> 세션 스토리지 </h3>
+    <hr>
+    상품명 : <input type="text" id="p_item">
+    수량   : <input type="text" id="p_cnt">
+    <button type="button" id="btn" onclick="fn_save()">저장</button>
+    <button type="button" onclick="fn_search()">검색</button>
+    <div id="p_div"></div>
+</body>
+</html>

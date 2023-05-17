@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>입력내용 저장</title>
+    <style>
+        div{margin: auto; padding: auto; width: 400px; }
+    </style>
+    <script>
+        window.onload= function(){
+            let formValues=JSON.parse(window.sessionStorage.getItem('formData'))||{};
+            console.log(formValues);
+            for(let name in formValues){
+                let element = document.getElementsByName(name)[0];
+                console.log(element);
+                if(element.type === 'radio'){
+                    let radios = document.getElementsByName(name);
+                    for(let i =0 ; i < radios.length; i++){
+                        // session에 담긴 value와 같은 라디오 엘리먼트 값을 true
+                        if(radios[i].value === formValues[name]){
+                            radios[i].checked=true;
+                        }
+                    }
+                }else{
+                    element.value= formValues[name];
+                }
+            }
+
+
+
+            document.getElementById('btn1').onclick= function(){
+                let formElements = document.getElementById('form1').elements;
+                for(let i=0; i<formElements.length ; i++){
+                    let element = formElements[i];
+                    if(element.type === 'text'){
+                        //input text
+                        formValues[element.name] = element.value;
+
+                    }else if(element.type === 'radio'){
+                        //input radio
+                        if(element.checked){
+                            formValues[element.name] = element.value;
+                        }
+                    }else if(element.type === 'select-one'){
+                        // select box
+                        formValues[element.name] = element.options[element.selectedIndex].value;
+
+
+                    }
+                }
+                window.sessionStorage.setItem('formData', JSON.stringify(formValues));
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <form action="#" id="form1">
+            <label for="input1">상품 : </label>
+            <select name="item1" id="input1">
+                <option value="" selected>선택하세요</option>
+                <option value="1">아이템1</option>
+                <option value="2">아이템2</option>
+                <option value="3">아이템3</option>
+            </select>
+            <label for="radio1">사이즈 : S</label><input id="radio1" type="radio" name="item2" value="S">
+            <label for="radio2">M</label><input id="radio2" type="radio" name="item2" value="M">
+            <label for="radio3">L</label><input id="radio3" type="radio" name="item2" value="L">
+            <label for=""></label>요청사항<input type="text" name="msg"><br>
+            <input type="reset" value="초기화">
+            <button id="btn1" type="button">임시저장</button>
+            <!-- button default 행동은 submit !! 요청이 되지 않게하려면 -> type=button -->
+            <button>테스트 버튼</button>
+        </form>
+    </div>
+</body>
+</html>

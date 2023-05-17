@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>attr & prop</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#btn1').click(function(){
+                // attr & prop 속성을 가져오거나 설정하는데 사용 
+                // attr 페이지가 처음 로드될 때 요소가 가지고 있던 속성 값 반환
+                // prop 현재 속성 값을 반환 
+                console.log($('input[name=item2]').attr('checked'));
+                console.log($('input[name=item2]').prop('checked'));
+                console.log($('input[name=item2]').is(':checked'));
+                // each문은 object, array 모두 사용 할 수 있는 반복 함수
+                // $.each(obj, function(index , value){});
+                // $(obj).each(function(index, value){});
+                $('input[name=item2]').each(function(i,v){
+                    console.log(i);
+                    console.log($(v));
+                    if($(v).is(":checked")){
+                        console.log($(v).val());
+                        console.log($(v).prop('checked'));
+                        console.log(i,"번째 radio가 checked true");
+                    }
+                });
+                $('input[type=text]').each(function(i,v){
+                    console.log($(v).val());
+                });
+
+            });
+        });
+    </script>
+</head>
+<body>
+    <label for="radio1">사이즈 : S</label><input id="radio1" type="radio" name="item2" value="S" checked>
+    <label for="radio2">M</label><input id="radio2" type="radio" name="item2" value="M">
+    <label for="radio3">L</label><input id="radio3" type="radio" name="item2" value="L">
+    <label for=""></label>요청사항<input type="text" name="msg"><br>
+    <button id="btn1" type="button">체크</button>
+    <input type="text">
+    <input type="text">
+    <input type="text">
+    <input type="text">
+</body>
+</html>

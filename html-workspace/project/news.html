@@ -53,13 +53,40 @@
             height: 100%;
             background-color: rgba(247, 247, 247, 0.927);
             z-index: 1;
+            display: flex;
+        }
+
+        .lefthigh {
+            width: 800px;
+            height: 50%;
+            flex: 1;
+            background-color: #964949;
+        }
+        .leftrow {
+            width: 800px;
+            height: 50%;
+            flex: 1;
+            background-color: #2a0505;
+        }
+        .righthigh {
+            width: 800px;
+            height: 50%;
+            flex: 1;
+            background-color: #363333;
+        }
+
+        .rightrow {
+            width: 800px;
+            height: 50%;
+            flex: 1;
+            background-color: #faf3f3;
         }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="main.html">가격봐방</a>
+            <a class="navbar-brand" href="main.html" ><img src="./logo.png" height="100px" width="100px" alt="">가격봐방</a>
             <div class="d-flex">
                 <button class="btn btn-primary me-2" type="button" onclick="redirectToLogin()">로그인</button>
                 <button class="btn btn-secondary" type="button" onclick="redirectToLogin()">회원가입</button>
@@ -78,7 +105,22 @@
     <div class="body-container">
         <video src="./도심.mp4" autoplay muted loop></video>
         <div class="centerbody">
-            기사넣을곳.
+            <div class="up">
+                <div class="lefthigh">
+                    1기사
+                </div>
+                <div class="leftrow">
+                    2기사
+                </div >  
+            </div>
+            <div class="down">
+                <div class="righthigh">
+                    3기사
+                </div>
+                <div class="rightrow">
+                    4기사
+                </div>
+            </div>
         </div>
     </div>
 </body>
