@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <script src="base.js"></script>
+    <title>Document</title>
+    <script>
+        let today = new Date();
+        console.log('지역' , today.toLocaleString()); // 우리나라시간인데 짤라오기힘들고
+        console.log('국제' , today.toISOString()); // 국제표준시 는 우리나라 -9시간 
+        console.log('국제표준', today.toISOString().slice(0,10));
+        let korea_today = new Date(today.getTime() + (9*60*60*1000)) ; // 국제표준시간 +9시간  결국 우리나라시간
+        console.log('우리나라시간:',korea_today);
+        console.log('우리나라시간:',korea_today.toISOString().slice(0,10));
+        let str_today = korea_today.toISOString().slice(0,10);
+        let ctx;
+        $(document).ready(function(){
+            ctx = $('#myChart');
+
+            $('#st_dt').add('#end_dt').val(str_today);
+            $('#st_dt').add('#end_dt').change(function(){
+                // 조건 1 오늘 날짜보다 크면 안됨
+                // 조건 2 start가 end보다 클 수 없음.
+                let st = new Date($('#st_dt').val());
+                let end = new Date($('#end_dt').val());
+
+                if(today < st || today < end){
+                    alert("오늘 날짜보다 클 수 없음.");
+                    $(this).val('');
+                    return;
+                }
+                if(end < st){
+                    alert("종료 일자가 더 빠름");
+                    $('#end_dt').val('')  ;
+                    return;
+                }
+
+            });
+
+        });
+
+
+
+        $(document).ready(function(){
+            $("#btn").click(function(){
+                let st_dt = $('#st_dt').val();
+                let end_dt = $('#end_dt').val();
+                fn_ajax(st_dt,end_dt);
+            });
+   
+
+    
+        });
+        
+        // 시작날짜 , 마지막날짜 입력해서 환율 obj받아오는 function
+        function fn_ajax(q_st,q_end){
+            let main_url ="https://api.exchangerate.host/timeseries";
+            $.ajax({
+               url : main_url
+               ,type:'get' 
+               ,data:{'start_date': q_st
+                    ,'end_date': q_end}
+                    ,dataType:'json'
+                    ,success : function(res){
+                        // console.log(res);
+                        let q_data = fn_exchange_dataset(res);
+                        let country = ['KRW','JPY','USD'];
+                        let sel_data = [];
+                        for(let i in country){
+                            sel_data.push(q_data[country[i]]);
+                        }
+                        console.log(country);
+                        let myChart = new Chart(ctx,{
+                            type : 'line'
+                            ,data : {
+                                labels : q_data.labels
+                                ,datasets :sel_data
+                            },options : {
+                                elements : { line : {tension:0.1}}
+                            }
+                        });
+                    }
+            });
+
+        }
+
+    </script>
+</head>
+<body>
+    <input type="date" id="st_dt">
+    <input type="date" id="end_dt">
+    <button type="button" id="btn" >조회</button>
+    <h3>환율</h3>
+    <div style="width:800px; height: 600px;">
+        <canvas id="myChart" width="800px" height="500px"></canvas>
+    </div>
+</body>
+</html>

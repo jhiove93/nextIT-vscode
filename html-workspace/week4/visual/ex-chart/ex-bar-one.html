@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>지역 종량제 봉투 가격</title>
+    <script>
+        $(document).ready(function(){
+            let sido = [];
+            $.ajax({
+                url: 'price.json'
+                ,type: 'get'
+                ,dataType : 'json'
+                ,success : function(res){
+                    console.log(res);
+                    // (1) 시도 중복제거 (key로 사용)
+                    // (2) 해당 시도에 해당조건의 (생활쓰레기 , 가정용, 10L 가격) 가격을 list형식으로
+                    // (3) 아래와 같이 Object형식으로
+
+                    // 시도별 , 생활쓰레기,가정용 , 10L 가격(시도별 평균으로)
+                    // {'대전광역시': ['금액','금액','금액']
+                    //   ,'서울시' : ['금액','금액','금액'}
+                   let p_data = {};
+                   records = res['records'];
+                   $.each(records, function(i,v){
+                    sido.push(v['시도명']);
+                   });
+                   //정렬후
+                   sido.sort();
+                   $.unique(sido);
+                   console.log(sido);
+                   //es6 이후
+                   let set = new Set();
+                   $.each(records, function(i,v){
+                    set.add(v['시도명']);
+                   });
+                   let sido2 = Array.from(set);  // Array 형태로 형변환
+                   console.log(sido2);
+
+                   $.each(sido, function(i,v){
+                    let temp_cost = [];
+                    $.each(records, function(idx,val){
+                        if(val['시도명']== v && val['종량제봉투용도']=='생활쓰레기' && val['종량제봉투사용대상']=='가정용'){
+                            if(val['10ℓ가격']!='0'){
+                                temp_cost.push(val['10ℓ가격']);
+                            }
+                        }
+                    });
+                    p_data[v]=temp_cost;
+                   });
+                   console.log(p_data);
+                   let data = [];
+                   let colors = [];
+                   $(sido).each(function(i,v){
+                    data.push(fn_avg(p_data[v]));
+                    colors.push(fn_random_color());
+                   });
+                   console.log(data);
+                   const ctx = document.getElementById('myChart');
+                    let config={
+                        type: 'bar',
+                        data: {
+                            labels: sido,
+                            datasets: [{
+                                label: '시도별 10리터 가격',
+                                data: data,
+                                borderWidth: 1,
+                                backgroundColor:colors,
+                                
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            plugins:{
+                                title:{
+                                    display: true,
+                                    text: '시도별 10리터 종량제봉투 가격 평균'
+                                },
+                                legend : {
+                                    display : false,
+                                }
+                            }
+                        }
+                    };
+                   let myChart = new Chart(ctx,config);
+                }
+            });
+            function fn_avg(arr){
+                let sum=0;
+                $(arr).each(function(i,v){
+                    sum += parseFloat(v);
+                });
+                return Math.round( sum / arr.length);
+            }
+            function fn_random_color(){
+                let R = Math.floor(Math.random() *(255+1));
+                let G = Math.floor(Math.random() *(255+1));
+                let B = Math.floor(Math.random() *(255+1));
+                let str = 'rgba('+R+','+G+','+B+',0.3)';
+                return str;
+            }
+        });
+        
+
+    </script>
+
+
+</head>
+<body>
+    <div class="container">
+        <canvas id="myChart"></canvas>
+    </div>
+</body>
+</html>

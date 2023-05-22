@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <title>Document</title>
+    <script>
+        $(document).ready(function () {
+            let ctx = $('#myChart');
+            let arr = [{
+                'label': 'KRW'
+                , 'labels': ['2023-01-01', '2023-01-02', '2023-01-03']
+                , 'data': [1000, 1100, 900]
+            }
+                , {
+                    'label': 'JYP'
+                , 'labels': ['2023-01-01', '2023-01-02', '2023-01-03']
+                , 'data': [100, 110, 900]
+
+            }
+            ];
+            /* let myChart = new Chart(ctx, {
+                type: 'line'
+                , data: {
+                    labels: ['2023-01-01', '2023-01-02', '2023-01-03']
+                    , datasets: [{label : 'KRW'
+                                , data : [1000,1100,900]}]
+                }
+                , options: {
+                    elements: {
+                        line: { tension: 0.1 } //부드럽게 그려줌
+                    }
+                }
+            }) */
+           /*  let q_labels = Object.values(arr).map(item => item.labels);
+            console.log(q_labels) */
+            let myChart = new Chart(ctx, {
+                type: 'line'
+                , data: {
+                    labels: arr[0].labels
+                    , datasets:arr
+                }
+                , options: {
+                    elements: {
+                        line: { tension: 0.1 } //부드럽게 그려줌
+                    }
+                }
+            })
+        });
+    </script>
+</head>
+
+<body>
+    <h3>환율</h3>
+    <div style="width: 700px; height: 500px;">
+        <canvas id="myChart" width="100%" height="80%"></canvas>
+    </div>
+</body>
+
+</html>

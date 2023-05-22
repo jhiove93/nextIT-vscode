@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <title>Document</title>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url : 'MBTI_Q.csv'
+                ,success : function(res){
+                    let array = fn_readCSV(res);
+                    console.log(array);
+                }
+            })
+        });
+        function fn_readCSV(d){
+            let rows = d.split('\r\n');
+            let arr = [];
+            let keys = rows[0].split(','); // 첫번째행
+            for(let i = 0 ; i < rows.length ; i++){
+                let obj = {};
+                let row = rows[i].split(',');
+                for(let j = 0; j<keys.length; j++){
+                    obj[keys[j]] = row[j];
+                }
+                arr.push(obj);
+            }
+            return arr;
+        }
+    </script>
+</head>
+<body>
+    <input type="file" id="file_id" >
+    <button id="btn" onclick="fn_read()">파일정보 조회</button><br>
+    <textarea  id="result" cols="60" rows="10"></textarea>
+</body>
+</html>

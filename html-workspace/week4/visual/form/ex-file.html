@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let reader = new FileReader();
+        reader.onload =  function(e){
+            let data = e.target.result;
+            console.log(data);
+            fn_readCSV(data);
+        }
+        function fn_readCSV(d){
+            let rows = d.split('\r\n');
+            let arr = [];
+            let keys = rows[0].split(','); // 첫번째행
+            console.log(rows);
+            console.log(keys);
+            for(let i = 0 ; i < rows.length ; i++){
+                let obj = {};
+                let row = rows[i].split(',');
+                for(let j = 0; j<keys.length; j++){
+                    obj[keys[j]] = row[j];
+                }
+                arr.push(obj);
+            }
+            console.log(arr);
+            return arr;
+        }
+
+        function fn_read(){
+            let files = document.getElementById('file_id').files;
+            let str = "";
+            for(let i = 0 ; i < files.length; i++){
+                f = files[i];
+                str += f.name + "\n";
+                if(f.name.indexOf('.csv') > -1){
+                    alert("엑셀형태");
+                    reader.readAsText(f);
+                }
+                str += f.type + "\n";
+                str += f.size + "\n";
+                str += f.lastModifiedDate + "\n";
+            }
+            document.getElementById('result').value =str;
+        }
+    </script>
+</head>
+<body>
+    <input type="file" id="file_id" >
+    <button id="btn" onclick="fn_read()">파일정보 조회</button><br>
+    <textarea  id="result" cols="60" rows="10"></textarea>
+</body>
+</html>

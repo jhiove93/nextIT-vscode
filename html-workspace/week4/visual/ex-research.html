@@ -27,13 +27,62 @@
             $('#q1_id input').click(function(){
                 if($('#q2-1').is(":checked")){
                     $("#q2_id").hide('slow');
-                    $("#q3_id").hide('slow');
+                    $("input[name=q3]").prop("checked",false);
+                    $("input[name=q4]").prop("checked",false);
                     
 
                 }else{
                     $("#q2_id").show('slow');
                     $("#q3_id").show('slow');
                 }
+            });
+            $("#btn").click(function(){
+
+                // 질문당 1개씩 선택
+                // 선택이 안되었다면 focus 주기
+                // q2-1을 선택했다면 1, 2, 5 질문만 선택확인
+                if($('#q2-5').is(':checked')){
+                    $('#q2-5').val($('#q2-5-input').val());
+                }
+
+                // name^='a' -> a로 시작되는
+                // name*='a' -> a가 포함되어있는
+                // name$='a' -> a로 끝나는 
+                // name q로 시작하는 것 중 체크된애들 중에 5로끝나는 name이 아닌 이름을 가진
+                // $('input[name^=q]:checked').not('input[name$=5]')
+                let arr_name =[];
+                $("input[name^=q]").each(function(i,v){
+                    arr_name.push($(v).attr('name'));
+                });
+                console.log(arr_name);
+                $.unique(arr_name); // $.unique  중복제거
+                console.log(arr_name);
+
+                // 선택 내용 가져오기
+                let formdata = $('#research_form').serializeArray();
+                let sel_key = [];
+                for(let v of formdata){
+                    sel_key.push(v['name']);
+                }
+                console.log('선택된 name:',sel_key);
+
+
+                // 2-1 0 선택시 3,4 선택 안해도 됨
+                if($('#q2-1').is(':checked')){
+                    arr_name = arr_name.filter((element) => element !== 'q3' && element !=='q4');
+                }
+                console.log('체크 할 name:',arr_name);
+
+                for(let v of arr_name){
+                    if(sel_key.indexOf(v)== -1){
+                        $('input[name='+v+']').eq(0).focus();
+                        alert("1개는 선택하셔야 합니다.");
+                        return;
+                    }
+                }
+
+ 
+                // $('#research_form').submit();
             });
         });
     </script>
@@ -53,7 +102,7 @@
                         </div>
                     </div>
                 </div>
-                <form action="" method="post">
+                <form id="research_form" action="http://localhost:8080/study/00test/research.jsp" method="post">
                     <div class="card-body bg-light">
                         <div class="tab-content">
                             <div class="row" id="q1_id">
@@ -161,39 +210,39 @@
                                     <label for="" class="form-label">5. 어떤 장르를 좋아하는지</label>
                                     <div class="input-group md-3">
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input" id="q5-1" name="q5" value="1">
+                                            <input type="checkbox" class="form-check-input" id="q5-1" name="q5" value="1">
                                             <label for="q5-1" class="form-check-label">범죄</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input" id="q5-2" name="q5" value="2">
+                                            <input type="checkbox" class="form-check-input" id="q5-2" name="q5" value="2">
                                             <label for="q5-2" class="form-check-label">느와르</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input" id="q5-3" name="q5" value="3">
+                                            <input type="checkbox" class="form-check-input" id="q5-3" name="q5" value="3">
                                             <label for="q5-3" class="form-check-label">무협</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input" id="q5-4" name="q5" value="4">
+                                            <input type="checkbox" class="form-check-input" id="q5-4" name="q5" value="4">
                                             <label for="q5-4" class="form-check-label">SF</label>
                                         </div>    
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input" id="q5-5" name="q5" value="5">
+                                            <input type="checkbox" class="form-check-input" id="q5-5" name="q5" value="5">
                                             <label for="q5-5" class="form-check-label">액션 </label>
                                         </div>    
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input" id="q5-6" name="q5" value="6">
+                                            <input type="checkbox" class="form-check-input" id="q5-6" name="q5" value="6">
                                             <label for="q5-6" class="form-check-label">멜로 </label>
                                         </div>  
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input" id="q5-7" name="q5" value="7">
+                                            <input type="checkbox" class="form-check-input" id="q5-7" name="q5" value="7">
                                             <label for="q5-7" class="form-check-label">공포 </label>
                                         </div>    
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input" id="q5-8" name="q5" value="8">
+                                            <input type="checkbox" class="form-check-input" id="q5-8" name="q5" value="8">
                                             <label for="q5-8" class="form-check-label">코미디 </label>
                                         </div>    
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input" id="q5-9" name="q5" value="9">
+                                            <input type="checkbox" class="form-check-input" id="q5-9" name="q5" value="9">
                                             <label for="q5-9" class="form-check-label">에로 </label>
                                         </div>      
                                     </div>

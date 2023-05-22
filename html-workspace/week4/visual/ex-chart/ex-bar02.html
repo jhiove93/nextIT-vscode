@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 500px ; height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <canvas id="myChart"></canvas>
+        <button id="btn" onclick="fn_change()">변경</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        /* 차트가져온거 */
+        const ctx = document.getElementById('myChart');
+        let config={
+            type: 'bar',
+            data: {
+                labels: ['nick','judy','jack'],
+                datasets: [{
+                            label: 'JAVA',
+                            data: [50, 60, 90],
+                            borderWidth: 1,
+                            backgroundColor : 'Red',
+                            },
+                            {
+                            label: 'DB',
+                            data: [90, 80, 40],
+                            borderWidth: 1,
+                            backgroundColor : 'Blue',
+                            }
+                        ]
+
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+        let myChart = new Chart(ctx,config);
+
+        function fn_change(){
+            config.data.datasets[0].data = [50,1,10,4,20,40]
+            myChart.update();
+        }
+    </script>
+
+</body>
+
+</html>
