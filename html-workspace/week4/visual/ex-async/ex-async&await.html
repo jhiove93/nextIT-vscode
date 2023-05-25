@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let nm = '';
+        function error_test(){
+            setTimeout(()=>{
+                nm = 'nick'
+            },1000) ;
+            return nm;
+        }
+        let name = error_test();
+        console.log(name);   // undefiend
+
+
+
+
+
+        async function test(){
+            let msg = await new Promise((resolve, reject)=>{
+                setTimeout(()=>{
+                    console.log('hellow');
+                    resolve({
+                        message : "promise가 성공적임.."
+                        ,data : [1,2,3]
+                    });
+                },1000);
+            });
+            return msg;
+        }
+        let result = test();
+        console.log(result.then((data)=>{console.log(data)}));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

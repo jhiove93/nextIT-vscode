@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let test = async () => {
+            // fetch는 javascript 에 내장된 웹 API로 비동기 네트워크 통신을 위한 인터페이스 제공
+            // HTTP요청을 쉽게 생성할 수 있으며 Promise 기반으로 동작하여 비동기 처리를 간편하게함.
+            let res = await fetch('https://api.upbit.com/v1/market/all');
+            console.log(res);
+            let result = res.json();
+            console.log(result);
+            result.then((data)=> console.log(data)).catch((error)=> {console.log(error)});
+        }
+        test();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

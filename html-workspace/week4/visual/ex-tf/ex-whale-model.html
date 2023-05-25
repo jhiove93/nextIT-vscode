@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+</head>
+<body>
+    <div class="file-upload-content">
+        <input type="file" onchange="fn_preview(event)"><br>
+        <img src="" alt="image preview" id="my_image" height="300px">
+        <div id="image-show"></div>
+    </div>
+    <div id="webcam-container"></div>
+    <div id="label-container"></div>
+<script type="text/javascript">
+
+    const URL = "https://teachablemachine.withgoogle.com/models/GHUb8WbLI/";
+    let model, webcam, labelContainer, maxPredictions;
+
+    $(document).ready(function(){
+        init();
+        $('#my_image').on('load',function(){
+            predict();
+        });
+    });
+    function fn_preview(e){
+        console.log(e);
+        let file = e.target.files[0];
+        let reader = new FileReader();
+        reader.onload = function(){
+            let img = document.getElementById('my_image');
+            img.src = reader.result;
+        }
+        reader.readAsDataURL(file);
+    }
+
+    async function init() {
+        const modelURL = URL + "model.json";
+        const metadataURL = URL + "metadata.json";
+        model = await tmImage.load(modelURL, metadataURL);
+        console.log(model);
+        maxPredictions = model.getTotalClasses();
+        labelContainer = document.getElementById('label-container');
+        for(let i = 0 ; i < maxPredictions; i++){
+            labelContainer.appendChild(document.createElement('div'));
+        }
+    }
+
+    async function predict() {
+        let image = document.getElementById('my_image');
+        let prediction = await model.predict(image);
+        for(let i = 0 ; i < maxPredictions ; i++){
+            let classPrediction = prediction[i].className +":"+ prediction[i].probability.toFixed(2);
+            console.log(prediction[i].className);
+            labelContainer.childNodes[i].innerHTML = classPrediction;
+        }
+    }
+</script>
+
+</body>
+</html>

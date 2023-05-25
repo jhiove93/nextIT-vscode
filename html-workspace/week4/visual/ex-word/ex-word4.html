@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.1.0/wordcloud2.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" id="file-input" multiple><br>
+    <canvas id="my_canvas" width="1000" height="800"></canvas>
+    <script>
+        let totalWordCountObject = {}; //총 단어 카운트
+        function countWords(str){
+            let counts = {};
+            let words = str.split(' ');
+            let stopwords = ['있다.','있다','있는','따르면','같은','위한'];
+            for(let word of words){
+                word = word.toLowerCase().trim();
+                if(word !== '' && word.length > 1 && !stopwords.includes(word)){
+                    counts[word] = counts[word] ? counts[word] + 1 : 1;
+                }
+            }
+            return counts;
+        }
+
+        document.getElementById('file-input').addEventListener('change',async function(event){
+                let files = event.target.files;
+                let promises = Array.from(files).map((file) => { // 각 파일에 대한 promise 배열 생성
+                    return new Promise((resolve,reject)=>{
+                        if(file.type==='text/plain'){   //텍스트 파일만 처리
+                            let reader = new FileReader();
+                            reader.onload = function(e){
+                                let text = e.target.result;
+                                let wordCountObject = countWords(text);
+                                console.log(wordCountObject);
+                                for(let word in wordCountObject){
+                                    // totalWordCountObject[word] || 0  은 존재하고 0이 아닌경우 그값을 반환, 존재하지 않거나 0 인경우 0
+                                    totalWordCountObject[word] = (totalWordCountObject[word] || 0 ) + wordCountObject[word];
+                                }
+                                resolve(); // 파일 읽기 완료시 
+                            }
+                            reader.onerror = reject; // 에러시 reject
+                            reader.readAsText(file);
+                        }else{
+                            resolve(); // 텍스트 파일 아닌경우 즉시 resolve
+                        }
+                    });
+                });
+                await Promise.all(promises); //모든 파일을 읽어올때까지 대기
+                let wordCloudList = [] ;
+                for(let word in totalWordCountObject){
+                    wordCloudList.push([word, totalWordCountObject[word]]);
+                }
+                WordCloud(document.getElementById('my_canvas'),{list:wordCloudList});
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let promise = new Promise((resolve,reject)=>{
+            let condition = true; // 바꿔서 테스트
+            if(condition){
+                resolve('promise가 성공적으로 이행됨');
+            }else{
+                reject('promise 실패..ㅠㅠ');
+            }
+        });
+        promise.then((msg)=>{
+            console.log('성공:', msg);
+        }).catch((error)=>{
+            console.log('실패:', error);
+        })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
