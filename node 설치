@@ -1,0 +1,4 @@
+npm install include
+npm install base
+npm install express
+npm install ejs

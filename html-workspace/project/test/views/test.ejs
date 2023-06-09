@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let v_ajax = new XMLHttpRequest();
+        function fn_get(){
+            let url = 'http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcSHTrade'; /*URL*/
+            var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'GPt75PIq0VuRdeTvylhsSc4IrxY0Rev4stgIS7wJuVu9h14cy2J8lwO6fV2FW74ZyKgqfAxh%2BrYRfmdaA04E2A%3D%3D'; /*Service Key*/
+            queryParams += '&' + encodeURIComponent('LAWD_CD') + '=' + encodeURIComponent('11110'); /**/
+            queryParams += '&' + encodeURIComponent('DEAL_YMD') + '=' + encodeURIComponent('201512'); /**/
+            v_ajax.open('GET', url + queryParams,true);
+            v_ajax.send('');
+        }
+            v_ajax.onreadystatechange = function () {
+                if (v_ajax.readyState == 4 && v_ajax.status==200) {
+                    console.log(v_ajax);
+                    console.log('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
+                }
+            };
+    </script>
+</head>
+<body>
+    <button type="button" onclick="fn_get()">가져오기</button>
+    <div class="row">
+        <div id="left_table">
+            <table id="coin_list"></table>
+        </div>
+        <div id="right_table"></div>
+    </div>
+</body>
+</html>

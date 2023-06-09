@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "base": "^3.0.0",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "include": "^1.1.0"
+  }
+}

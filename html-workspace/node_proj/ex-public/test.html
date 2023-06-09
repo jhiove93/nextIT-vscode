@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <title>Document</title>
+    <script>
+        let numOfRows=10
+        let url='https://apis.data.go.kr/B551011/GoCamping/basedList'
+        let MobileOS='ETC'
+        let MobileApp='AppTest'
+        let _type='json'
+        let serviceKey='01/u7SxCxMdAKSpKhhWj/x4Qh9TmVtiTH+IWuVKC1G55zIZzc/J61x4mSkmjAoWE7G7YJgmM8tQzmQs+6dGdng=='
+
+        $(document).ready(function(){
+            $.ajax({
+                url : url
+                ,dataType : 'json'
+                ,type : 'get'
+                ,data : {serviceKey : serviceKey
+                        , MobileApp : MobileApp
+                        ,MobileOS : MobileOS
+                        , _type : _type
+                        ,numOfRows : numOfRows}
+                ,success: function(res){
+                    console.log(res);
+                },error : function(e){
+                    console.log(e);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

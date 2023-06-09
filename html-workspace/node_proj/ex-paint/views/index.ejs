@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Draw Together</title>
+    <style>
+        #draw {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h2>Draw Together</h2>
+    <div>
+        <p>Users online: <span id="user-count"></span></p>
+        <p>Current Drawer: <span id="current-drawer"></span></p>
+    </div>
+    <canvas id="draw" width="800" height="800"></canvas>
+    <button id="next" disabled>Next Turn</button>
+    <button id="clear" disabled>Clear Canvas</button>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+</body>
+</html>

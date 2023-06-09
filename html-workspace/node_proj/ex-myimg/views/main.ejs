@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <title>Document</title>
+    <script>
+        let msg = '<%= msg %>';
+        if(msg != 'N'){
+            alert(msg);
+        }
+        $(document).ready(function(){
+            $('#btn').click(function(){
+                let doc = $('#user_id').clone();
+                let goform = $('<form>', {
+                    method : 'post'
+                    ,action : 'http://localhost:3333/mypage'
+                    , target : '_self'
+                }).appendTo('body');
+                goform.append(doc);
+                goform.submit();
+            });
+        });
+    </script>
+</head>
+<body>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="myfile" accept="image/*">
+        <input type="text" name="user_id" id="user_id" value="<%= id %>">
+        <input type="submit" value="upload">
+        <input type="button" value="views" id="btn">
+    </form>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script>
+        url = 'https://openapi.naver.com/v1/search/local';
+        $(document).ready(function() {
+            $('#btn').click(function() {
+                let text = $('#q_input').val();
+                fn_search(text);
+            });
+        });
+        function fn_search(msg) {
+            console.log(msg);
+            $.ajax({
+                url : 'http://127.0.0.1:3000/search'
+                ,data : {'query' : msg
+                       , 'display' : 100}
+                ,type : 'get'
+                ,success : function(res) {
+                    console.log(res);
+                    $.each(res['items'], function(i, v) {
+                        $('#div_id').append('<p>' + v['title'] + ':' + v['address'] + '</p>')
+                    });
+                }, error(e) {
+                    console.log('error: ', e);
+                }
+            });
+        }
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="q_input"><button type="button" id="btn">검색</button>
+    <div id="div_id"></div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    
+    <script>
+        $(document).ready(function(){
+             let cnt = 0;
+             let nm = prompt('별명을 입력하세요 ^^ :');
+             const socket = io();
+             socket.emit('message', nm + " 님 입장");
+             socket.on('usercount',(count)=>{
+                $('#cnt').text(count + '명 접속');
+             });
+             socket.on('message', (msg)=>{
+                let msgEl = document.createElement('div');
+                msgEl.classList.add('message','sent');
+                msgEl.innerHTML = msg;
+                $('.chat-history').append(msgEl);
+                $('.chat-input').val(''); // 전송 후 입력창 지우기
+                console.log(msg);
+             });
+             function send_message(){
+                let input_msg = $('#chat-input').val();
+                if(input_msg.trim() !== ''){
+                    socket.emit('message', nm+ ' 님의 메시지:' + input_msg);
+                }
+             }
+             $('.chat-send-button').click(function(){
+                send_message();
+             });
+             $('.chat-input').keypress(function(e){ 
+                if(e.key == 'Enter'){ // 엔터면 전송
+                    send_message();
+                }
+             });
+        });
+    </script>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header"> Chat user <span id="cnt"></span></div>
+        <div class="chat-history"></div>
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" 
+                 id="chat-input" placeholder="type to message..">
+            <button id="btn" class="chat-send-button">send</button>
+        </div>
+    </div>
+</body>
+</html>

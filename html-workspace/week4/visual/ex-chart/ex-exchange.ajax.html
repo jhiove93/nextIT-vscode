@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <script src="base.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <title>Document</title>
     <script>
         let today = new Date();
@@ -70,6 +70,7 @@
                         let q_data = fn_exchange_dataset(res);
                         let country = q_data['KRW'];
                         console.log(country);
+
                         let myChart = new Chart(ctx,{
                             type : 'line'
                             ,data : {
@@ -83,6 +84,8 @@
                                 elements : { line : {tension:0.1}}
                             }
                         })
+
+                        
                     }
             });
 
